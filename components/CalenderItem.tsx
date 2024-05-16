@@ -16,9 +16,8 @@ export default function CalenderItem(props: Props) {
 
 const styles = StyleSheet.create({
   button: {
-    margin: 5,
-    width: "20%",
-    backgroundColor: "blue",
+    width: "19%",
+    backgroundColor: "pink",
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",

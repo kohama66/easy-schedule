@@ -1,15 +1,28 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 type Props = {
   date: number;
+  checked: boolean;
+  onPress: () => void;
 };
 
 export default function CalenderItem(props: Props) {
   return (
-    <TouchableOpacity onPress={() => {}} style={styles.button}>
+    <TouchableOpacity
+      onPress={props.onPress}
+      style={{
+        backgroundColor: props.checked ? "pink" : "blue",
+        ...styles.button,
+      }}
+    >
       <Text style={styles.text}>{props.date.toString()}</Text>
-      <Entypo name="circle" size={24} color="white" />
+      {props.checked ? (
+        <Entypo name="circle" size={24} color="white" />
+      ) : (
+        <AntDesign name="close" size={24} color="white" />
+      )}
     </TouchableOpacity>
   );
 }
@@ -17,7 +30,6 @@ export default function CalenderItem(props: Props) {
 const styles = StyleSheet.create({
   button: {
     width: "19%",
-    backgroundColor: "pink",
     borderRadius: 4,
     justifyContent: "center",
     alignItems: "center",

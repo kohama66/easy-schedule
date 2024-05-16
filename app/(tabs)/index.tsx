@@ -7,21 +7,30 @@ export default function HomeScreen() {
   const now = new Date();
   const [month, setMonth] = useState(now.getMonth() + 1);
 
+  const changeMonth = (delta: number) => {
+    setMonth((prevMonth) => {
+      let newMonth = prevMonth + delta;
+      if (newMonth < 1) {
+        newMonth = 12;
+      } else if (newMonth > 12) {
+        newMonth = 1;
+      }
+      return newMonth;
+    });
+  };
+
   return (
     <View style={styles.baseContainer}>
       <View style={styles.monthContainer}>
-        <TouchableOpacity onPress={() => setMonth((prev) => prev - 1)}>
+        <TouchableOpacity onPress={() => changeMonth(-1)}>
           <FontAwesome name="caret-left" size={70} color="blue" />
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.month}
-          onPress={() => setMonth((prev) => prev + 1)}
-        >
+        <TouchableOpacity style={styles.month}>
           <Text style={styles.monthLabel}>{month.toString()}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setMonth((prev) => prev + 1)}>
+        <TouchableOpacity onPress={() => changeMonth(1)}>
           <FontAwesome name="caret-right" size={70} color="blue" />
         </TouchableOpacity>
       </View>

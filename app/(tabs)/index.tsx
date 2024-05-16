@@ -1,11 +1,32 @@
 import Calender from "@/components/Calender";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function HomeScreen() {
+  const now = new Date();
+  const [month, setMonth] = useState(now.getMonth() + 1);
+
   return (
     <View style={styles.baseContainer}>
-      <Text>Hello, I am your cat</Text>
-      <Calender />
+      <View style={styles.monthContainer}>
+        <TouchableOpacity onPress={() => setMonth((prev) => prev - 1)}>
+          <FontAwesome name="caret-left" size={70} color="blue" />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.month}
+          onPress={() => setMonth((prev) => prev + 1)}
+        >
+          <Text style={styles.monthLabel}>{month.toString()}</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setMonth((prev) => prev + 1)}>
+          <FontAwesome name="caret-right" size={70} color="blue" />
+        </TouchableOpacity>
+      </View>
+
+      <Calender month={month} />
     </View>
   );
 }
@@ -13,6 +34,31 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   baseContainer: {
     flex: 1,
+    paddingTop: 60,
+  },
+
+  monthContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 40,
+    marginTop: 30,
+  },
+
+  month: {
+    backgroundColor: "blue",
+    width: 100,
+    height: 100,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 999,
+    marginHorizontal: 12,
+  },
+
+  monthLabel: {
+    fontSize: 50,
+    color: "white",
   },
 });
 

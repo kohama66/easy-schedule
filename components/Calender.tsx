@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import CalenderItem from "./CalenderItem";
 
@@ -30,6 +30,10 @@ function _Calender({ days, handleResult }: _props) {
       ok: true,
     }))
   );
+
+  useEffect(() => {
+    handleResult(dates);
+  }, [dates]);
 
   const toggle = (date: number) => {
     const result = dates.map((d) => (d.day === date ? { ...d, ok: !d.ok } : d));

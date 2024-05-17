@@ -2,6 +2,7 @@ import Calender from "@/components/Calender";
 import { useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import * as Clipboard from "expo-clipboard";
 
 export default function HomeScreen() {
   const now = new Date();
@@ -25,7 +26,12 @@ export default function HomeScreen() {
   };
 
   const onEnter = () => {
-    console.log(result);
+    const daysText = result
+      .map((date) => `${date.day}日 : ${date.ok ? "⚪︎" : "×"}`)
+      .join("\n");
+
+    const text = month + "月\n" + daysText;
+    Clipboard.setStringAsync(text);
   };
 
   return (

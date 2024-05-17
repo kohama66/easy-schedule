@@ -6,6 +6,7 @@ import { FontAwesome } from "@expo/vector-icons";
 export default function HomeScreen() {
   const now = new Date();
   const [month, setMonth] = useState(now.getMonth() + 1);
+  const [result, setResult] = useState<{ day: number; ok: boolean }[]>([]);
 
   const changeMonth = (delta: number) => {
     setMonth((prevMonth) => {
@@ -17,6 +18,14 @@ export default function HomeScreen() {
       }
       return newMonth;
     });
+  };
+
+  const handleSetResult = (value: { day: number; ok: boolean }[]) => {
+    setResult(value);
+  };
+
+  const onEnter = () => {
+    console.log(result);
   };
 
   return (
@@ -35,10 +44,10 @@ export default function HomeScreen() {
         </TouchableOpacity>
       </View>
 
-      <Calender month={month} />
+      <Calender month={month} handleResult={handleSetResult} />
 
       <View style={styles.submitWrapper}>
-        <Button title="Enter" color="white" />
+        <Button title="Enter" color="white" onPress={onEnter} />
       </View>
     </View>
   );

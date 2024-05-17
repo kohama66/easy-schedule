@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 type Props = {
   date: number;
-  checked: boolean;
+  ok: boolean;
   onPress: () => void;
 };
 
@@ -13,12 +13,12 @@ export default function CalenderItem(props: Props) {
     <TouchableOpacity
       onPress={props.onPress}
       style={{
-        backgroundColor: props.checked ? "pink" : "blue",
+        backgroundColor: props.ok ? "pink" : "blue",
         ...styles.button,
       }}
     >
       <Text style={styles.text}>{props.date.toString()}</Text>
-      {props.checked ? (
+      {props.ok ? (
         <Entypo name="circle" size={24} color="white" />
       ) : (
         <AntDesign name="close" size={24} color="white" />

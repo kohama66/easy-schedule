@@ -4,9 +4,10 @@ import CalenderItem from "./CalenderItem";
 
 type Props = {
   month: number;
+  handleResult: (value: { day: number; ok: boolean }[]) => void;
 };
 
-export default function Calender({ month }: Props) {
+export default function Calender({ month, handleResult }: Props) {
   const now = new Date();
   const year = now.getFullYear();
   // 月の最終日を取得
@@ -14,25 +15,27 @@ export default function Calender({ month }: Props) {
   // 日付の配列を作成
   const daysArray = Array.from({ length: lastDay }, (_, i) => i + 1);
 
-  return <_Calender key={month} days={daysArray} />;
+  return <_Calender key={month} days={daysArray} handleResult={handleResult} />;
 }
 
 type _props = {
   days: number[];
+  handleResult: (value: { day: number; ok: boolean }[]) => void;
 };
 
-function _Calender({ days }: _props) {
-  const [dates, setDates] = useState<{ value: number; checked: boolean }[]>(
+function _Calender({ days, handleResult }: _props) {
+  const [dates, setDates] = useState<{ day: number; ok: boolean }[]>(
     days.map((day) => ({
-      value: day,
-      checked: true,
+      day,
+      ok: true,
     }))
   );
 
   const toggle = (date: number) => {
-    setDates((prev) =>
-      prev.map((d) => (d.value === date ? { ...d, checked: !d.checked } : d))
-    );
+    const result = dates.map((d) => (d.day === date ? { ...d, ok: !d.ok } : d));
+
+    setDates(result);
+    handleResult(result);
   };
 
   return (
@@ -40,10 +43,10 @@ function _Calender({ days }: _props) {
       <View style={styles.buttonContainer}>
         {dates.map((date) => (
           <CalenderItem
-            key={date.value}
-            date={date.value}
-            checked={date.checked}
-            onPress={() => toggle(date.value)}
+            key={date.day}
+            date={date.day}
+            ok={date.ok}
+            onPress={() => toggle(date.day)}
           />
         ))}
       </View>

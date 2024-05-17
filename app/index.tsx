@@ -3,11 +3,12 @@ import { useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
+import { newScheduleDays, ScheduleDay } from "@/utils/scheduleDays";
 
 export default function HomeScreen() {
   const now = new Date();
   const [month, setMonth] = useState(now.getMonth() + 1);
-  const [result, setResult] = useState<{ day: number; ok: boolean }[]>([]);
+  const [result, setResult] = useState<ScheduleDay[]>(newScheduleDays(month));
 
   const changeMonth = (delta: number) => {
     setMonth((prevMonth) => {
@@ -21,7 +22,7 @@ export default function HomeScreen() {
     });
   };
 
-  const handleSetResult = (value: { day: number; ok: boolean }[]) => {
+  const handleSetResult = (value: ScheduleDay[]) => {
     setResult(value);
   };
 

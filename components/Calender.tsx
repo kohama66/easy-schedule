@@ -1,35 +1,19 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import CalenderItem from "./CalenderItem";
+import { newScheduleDays, ScheduleDay } from "@/utils/scheduleDays";
 
 type Props = {
   month: number;
-  handleResult: (value: { day: number; ok: boolean }[]) => void;
+  handleResult: (value: ScheduleDay[]) => void;
 };
 
 export default function Calender({ month, handleResult }: Props) {
-  const now = new Date();
-  const year = now.getFullYear();
-  // 月の最終日を取得
-  const lastDay = new Date(year, month, 0).getDate();
-  // 日付の配列を作成
-  const daysArray = Array.from({ length: lastDay }, (_, i) => i + 1);
-
-  return <_Calender key={month} days={daysArray} handleResult={handleResult} />;
+  return <_Calender key={month} month={month} handleResult={handleResult} />;
 }
 
-type _props = {
-  days: number[];
-  handleResult: (value: { day: number; ok: boolean }[]) => void;
-};
-
-function _Calender({ days, handleResult }: _props) {
-  const [dates, setDates] = useState<{ day: number; ok: boolean }[]>(
-    days.map((day) => ({
-      day,
-      ok: true,
-    }))
-  );
+function _Calender({ month, handleResult }: Props) {
+  const [dates, setDates] = useState<ScheduleDay[]>(newScheduleDays(month));
 
   useEffect(() => {
     handleResult(dates);
@@ -39,7 +23,6 @@ function _Calender({ days, handleResult }: _props) {
     const result = dates.map((d) => (d.day === date ? { ...d, ok: !d.ok } : d));
 
     setDates(result);
-    handleResult(result);
   };
 
   return (

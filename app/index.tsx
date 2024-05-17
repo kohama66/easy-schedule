@@ -36,6 +36,10 @@ export default function HomeScreen() {
       </View>
 
       <Calender month={month} />
+
+      <View style={styles.submitWrapper}>
+        <Button title="Go to Details" color="white" />
+      </View>
     </View>
   );
 }
@@ -43,15 +47,15 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   baseContainer: {
     flex: 1,
-    paddingTop: 60,
+    paddingTop: 30,
   },
 
   monthContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 40,
-    marginTop: 30,
+    marginBottom: 20,
+    marginTop: 40,
   },
 
   month: {
@@ -68,6 +72,16 @@ const styles = StyleSheet.create({
   monthLabel: {
     fontSize: 50,
     color: "white",
+  },
+
+  submitWrapper: {
+    marginTop: "auto",
+    marginBottom: 40,
+    backgroundColor: "blue",
+    width: "80%",
+    alignSelf: "center",
+    borderRadius: 999,
+    paddingVertical: 10,
   },
 });
 

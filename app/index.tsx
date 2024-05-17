@@ -38,7 +38,7 @@ export default function HomeScreen() {
       <Calender month={month} />
 
       <View style={styles.submitWrapper}>
-        <Button title="Go to Details" color="white" />
+        <Button title="Enter" color="white" />
       </View>
     </View>
   );

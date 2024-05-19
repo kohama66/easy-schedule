@@ -27,10 +27,7 @@ export const setScheduleDaysInStorage = async (
   await setStorage(SCHEDULE_DAYS_JSON_KEY, value);
 };
 
-export const getScheduleDaysFromStorage = async (
-  month: number
-): Promise<ScheduleDay[]> => {
+export const getScheduleDaysFromStorage = async (): Promise<ScheduleDay[]> => {
   const value = await getStorage(SCHEDULE_DAYS_JSON_KEY);
-
-  return value ? JSON.parse(value) : newScheduleDays(month);
+  return value ? JSON.parse(value) : [];
 };

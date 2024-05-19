@@ -1,38 +1,29 @@
 import Calender from "@/components/Calender";
 import { useState } from "react";
-import { Button, StyleSheet, View } from "react-native";
-import * as Clipboard from "expo-clipboard";
-import { getScheduleDaysFromStorage } from "@/utils/scheduleDays";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MonthSelector } from "@/components/MonthSelector";
-import Toast from "react-native-toast-message";
+import { Link } from "expo-router";
 
 export default function HomeScreen() {
   const now = new Date();
   const [month, setMonth] = useState(now.getMonth() + 1);
-
-  const onEnter = async () => {
-    const result = await getScheduleDaysFromStorage(month);
-    const daysText = result
-      .map((date) => `${date.day}日 : ${date.ok ? "⚪︎" : "×"}`)
-      .join("\n");
-
-    const text = month + "月\n" + daysText;
-    Clipboard.setStringAsync(text);
-    Toast.show({
-      type: "success",
-      text1: "コピーが完了しました",
-      text2: "貼り付けて使用してください 👋",
-    });
-  };
 
   return (
     <View style={styles.baseContainer}>
       <MonthSelector month={month} setMonth={setMonth} />
       <Calender month={month} />
 
-      <View style={styles.submitWrapper}>
-        <Button title="Enter" color="white" onPress={onEnter} />
-      </View>
+      <TouchableOpacity style={styles.linkWrapper}>
+        <Link
+          href={{
+            pathname: "/time",
+            params: { month },
+          }}
+          style={{ paddingVertical: 20 }}
+        >
+          <Text style={styles.enter}>Enter</Text>
+        </Link>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -68,13 +59,20 @@ const styles = StyleSheet.create({
     color: "white",
   },
 
-  submitWrapper: {
+  linkWrapper: {
     marginTop: "auto",
     marginBottom: 40,
     backgroundColor: "blue",
     width: "80%",
     alignSelf: "center",
+    justifyContent: "center",
     borderRadius: 999,
-    paddingVertical: 10,
+  },
+
+  enter: {
+    textAlign: "center",
+    width: "100%",
+    fontSize: 18,
+    color: "white",
   },
 });

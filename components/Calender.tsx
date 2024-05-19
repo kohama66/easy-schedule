@@ -1,22 +1,25 @@
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import CalenderItem from "./CalenderItem";
-import { newScheduleDays, ScheduleDay } from "@/utils/scheduleDays";
+import {
+  newScheduleDays,
+  ScheduleDay,
+  setScheduleDaysInStorage,
+} from "@/utils/scheduleDays";
 
 type Props = {
   month: number;
-  handleResult: (value: ScheduleDay[]) => void;
 };
 
-export default function Calender({ month, handleResult }: Props) {
-  return <_Calender key={month} month={month} handleResult={handleResult} />;
+export default function Calender({ month }: Props) {
+  return <_Calender key={month} month={month} />;
 }
 
-function _Calender({ month, handleResult }: Props) {
+function _Calender({ month }: Props) {
   const [dates, setDates] = useState<ScheduleDay[]>(newScheduleDays(month));
 
   useEffect(() => {
-    handleResult(dates);
+    setScheduleDaysInStorage(month, dates);
   }, [dates]);
 
   const toggle = (date: number) => {

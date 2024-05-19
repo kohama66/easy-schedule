@@ -2,20 +2,16 @@ import Calender from "@/components/Calender";
 import { useState } from "react";
 import { Button, StyleSheet, View } from "react-native";
 import * as Clipboard from "expo-clipboard";
-import { newScheduleDays, ScheduleDay } from "@/utils/scheduleDays";
+import { getScheduleDaysFromStorage } from "@/utils/scheduleDays";
 import { MonthSelector } from "@/components/MonthSelector";
 import Toast from "react-native-toast-message";
 
 export default function HomeScreen() {
   const now = new Date();
   const [month, setMonth] = useState(now.getMonth() + 1);
-  const [result, setResult] = useState<ScheduleDay[]>(newScheduleDays(month));
 
-  const handleSetResult = (value: ScheduleDay[]) => {
-    setResult(value);
-  };
-
-  const onEnter = () => {
+  const onEnter = async () => {
+    const result = await getScheduleDaysFromStorage(month);
     const daysText = result
       .map((date) => `${date.day}日 : ${date.ok ? "⚪︎" : "×"}`)
       .join("\n");
@@ -32,7 +28,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.baseContainer}>
       <MonthSelector month={month} setMonth={setMonth} />
-      <Calender month={month} handleResult={handleSetResult} />
+      <Calender month={month} />
 
       <View style={styles.submitWrapper}>
         <Button title="Enter" color="white" onPress={onEnter} />

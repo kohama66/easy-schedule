@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default function CalenderItem(props: Props) {
-  const color = props.ok ? "rgba(0, 0, 255, 0.5)" : "rgba(255, 0, 0, 0.5)";
+  const color = props.ok ? "rgba(60, 60, 255, 0.6)" : "rgba(255, 60, 60, 0.6)";
 
   return (
     <TouchableOpacity
@@ -19,7 +19,7 @@ export default function CalenderItem(props: Props) {
         ...styles.button,
       }}
     >
-      <Shadow distance={44} startColor={color} offset={[0, 0]}>
+      <Shadow distance={40} startColor={color} offset={[0, 0]}>
         <Text style={styles.text}>{props.date.toString()}</Text>
         {props.ok ? (
           <Entypo name="circle" size={24} color="white" />

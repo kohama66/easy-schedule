@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   baseContainer: {
     flex: 1,
     paddingTop: 30,
-    backgroundColor: "#001019",
+    backgroundColor: "#181033",
   },
 
   monthContainer: {

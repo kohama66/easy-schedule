@@ -22,6 +22,7 @@ export default function App() {
   const [days, setDays] = useState<ScheduleDay[]>([]);
   const { control, handleSubmit, setValue } = useForm<FormData>();
   const { month } = useLocalSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     const getStorageValue = async () => {
@@ -52,6 +53,7 @@ export default function App() {
       text1: "コピーが完了しました",
       text2: "貼り付けて使用してください 👋",
     });
+    router.push("/");
   };
 
   return (

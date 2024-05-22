@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 4,
     width: "80%",
   },
 });

@@ -22,7 +22,7 @@ export const MonthSelector = ({ month, setMonth }: Props) => {
   return (
     <View style={styles.monthContainer}>
       <TouchableOpacity onPress={() => changeMonth(-1)}>
-        <FontAwesome name="caret-left" size={70} color="blue" />
+        <FontAwesome name="caret-left" size={70} color="#C72C13" />
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.month}>
@@ -30,7 +30,7 @@ export const MonthSelector = ({ month, setMonth }: Props) => {
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => changeMonth(1)}>
-        <FontAwesome name="caret-right" size={70} color="blue" />
+        <FontAwesome name="caret-right" size={70} color="#C72C13" />
       </TouchableOpacity>
     </View>
   );
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
 
   month: {
-    backgroundColor: "blue",
+    backgroundColor: "#C72C13",
     width: 65,
     height: 65,
     flexDirection: "row",
@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
 
   monthLabel: {
     fontSize: 30,
-    color: "white",
+    color: "#d1d1d1",
   },
 });

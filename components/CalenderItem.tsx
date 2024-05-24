@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Shadow } from "react-native-shadow-2";
@@ -19,14 +19,16 @@ export default function CalenderItem(props: Props) {
         ...styles.button,
       }}
     >
-      <Shadow distance={40} startColor={color} offset={[0, 0]}>
+      <View style={styles.inner}>
+        {/* <Shadow distance={40} startColor={color} offset={[0, 0]}> */}
         <Text style={styles.text}>{props.date.toString()}</Text>
         {props.ok ? (
-          <Entypo name="circle" size={24} color="white" />
+          <Entypo name="circle" size={24} color="#d1d1d1" />
         ) : (
-          <AntDesign name="close" size={24} color="white" />
+          <AntDesign name="close" size={24} color="#d1d1d1" />
         )}
-      </Shadow>
+        {/* </Shadow> */}
+      </View>
     </TouchableOpacity>
   );
 }
@@ -38,12 +40,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 16,
-    borderWidth: 1,
+    // borderWidth: 1,
+    // borderColor: "white",
+    // padding: 4,
+  },
+
+  inner: {
+    // backgroundColor: "#1F212C",
+    // borderWidth: 1,
     borderColor: "white",
+    // width: "100%",
   },
 
   text: {
-    color: "white",
+    color: "#d1d1d1",
     fontSize: 20,
     textAlign: "center",
     marginBottom: 4,

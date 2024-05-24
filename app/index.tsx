@@ -10,6 +10,7 @@ import {
 import { MonthSelector } from "@/components/MonthSelector";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import { Colors } from "@/constants/Colors";
 
 export default function HomeScreen() {
   const now = new Date();
@@ -68,6 +69,6 @@ const styles = StyleSheet.create({
     width: "100%",
     fontSize: 18,
     fontWeight: "bold",
-    color: "#d1d1d1",
+    color: Colors.default.textWhite,
   },
 });

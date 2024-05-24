@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Shadow } from "react-native-shadow-2";
+import { Colors } from "@/constants/Colors";
 
 type Props = {
   date: number;
@@ -23,9 +24,9 @@ export default function CalenderItem(props: Props) {
         {/* <Shadow distance={40} startColor={color} offset={[0, 0]}> */}
         <Text style={styles.text}>{props.date.toString()}</Text>
         {props.ok ? (
-          <Entypo name="circle" size={24} color="#d1d1d1" />
+          <Entypo name="circle" size={24} color={Colors.default.textWhite} />
         ) : (
-          <AntDesign name="close" size={24} color="#d1d1d1" />
+          <AntDesign name="close" size={24} color={Colors.default.textWhite} />
         )}
         {/* </Shadow> */}
       </View>
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: "#d1d1d1",
+    color: Colors.default.textWhite,
     fontSize: 20,
     textAlign: "center",
     marginBottom: 4,

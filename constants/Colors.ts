@@ -27,5 +27,6 @@ export const Colors = {
   default: {
     textWhite: "#d1d1d1",
     primary: "#C72C13",
+    dark: "#141517",
   },
 };

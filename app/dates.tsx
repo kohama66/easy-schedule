@@ -13,6 +13,9 @@ import {
 import * as Clipboard from "expo-clipboard";
 import Toast from "react-native-toast-message";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { BaseWrapper } from "@/components/BaseWrapper";
+import { Colors } from "@/constants/Colors";
+import { rgba } from "@/utils/color";
 
 type FormData = {
   [key: string]: string;
@@ -57,11 +60,13 @@ export default function App() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
+    <BaseWrapper>
       <View style={styles.baseContainer}>
         {days.map((d) => (
           <View style={styles.inputWrapper} key={d.day}>
-            <Text style={{ fontSize: 18, color: "white" }}>{d.day}日 : </Text>
+            <Text style={{ fontSize: 18, color: Colors.default.textWhite }}>
+              {d.day}日 :{" "}
+            </Text>
             <Controller
               control={control}
               name={d.day.toString()}
@@ -77,46 +82,43 @@ export default function App() {
           </View>
         ))}
 
-        <TouchableOpacity style={styles.linkWrapper}>
-          <Button title="Copy" onPress={handleSubmit(onSubmit)} color="white" />
+        <TouchableOpacity style={styles.buttonWrapper}>
+          <Button
+            title="Copy"
+            onPress={handleSubmit(onSubmit)}
+            color={Colors.default.textWhite}
+          />
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </BaseWrapper>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollViewContent: {
-    flexGrow: 1,
-  },
-
   baseContainer: {
-    flex: 1,
     paddingTop: 80,
-    backgroundColor: "#181033",
-    flexGrow: 1,
   },
 
   inputWrapper: {
-    backgroundColor: "#362C58",
+    backgroundColor: rgba(Colors.default.dark, 0.7),
     width: "80%",
     alignSelf: "center",
     flexDirection: "row",
     paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 999,
-    marginBottom: 20,
+    paddingVertical: 12,
+    borderRadius: 16,
+    marginBottom: 16,
   },
 
   input: {
     fontSize: 18,
-    color: "white",
+    color: Colors.default.textWhite,
     flex: 1,
   },
 
-  linkWrapper: {
+  buttonWrapper: {
     marginVertical: 40,
-    backgroundColor: "blue",
+    backgroundColor: Colors.default.primary,
     width: "80%",
     alignSelf: "center",
     paddingVertical: 10,

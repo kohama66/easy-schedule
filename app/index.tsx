@@ -18,7 +18,7 @@ export default function HomeScreen() {
         <TouchableOpacity style={styles.linkWrapper}>
           <Link
             href={{
-              pathname: "/time",
+              pathname: "/dates",
               params: { month },
             }}
             style={{ paddingVertical: 20 }}
@@ -35,11 +35,11 @@ const styles = StyleSheet.create({
   inner: {
     paddingTop: 30,
     paddingBottom: 60,
-    flex: 1,
+    minHeight: "100%",
   },
 
   linkWrapper: {
-    marginTop: 40,
+    marginTop: "auto",
     backgroundColor: "#C72C13",
     width: "80%",
     alignSelf: "center",

@@ -7,7 +7,6 @@ import {
   TextInput,
   View,
   Button,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import * as Clipboard from "expo-clipboard";
@@ -64,7 +63,13 @@ export default function App() {
       <View style={styles.baseContainer}>
         {days.map((d) => (
           <View style={styles.inputWrapper} key={d.day}>
-            <Text style={{ fontSize: 18, color: Colors.default.textWhite, fontWeight: "bold" }}>
+            <Text
+              style={{
+                fontSize: 18,
+                color: Colors.default.textWhite,
+                fontWeight: "bold",
+              }}
+            >
               {d.day}日 :{" "}
             </Text>
             <Controller

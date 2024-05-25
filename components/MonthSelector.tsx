@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -22,7 +23,11 @@ export const MonthSelector = ({ month, setMonth }: Props) => {
   return (
     <View style={styles.monthContainer}>
       <TouchableOpacity onPress={() => changeMonth(-1)}>
-        <FontAwesome name="caret-left" size={70} color="blue" />
+        <FontAwesome
+          name="caret-left"
+          size={70}
+          color={Colors.default.primary}
+        />
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.month}>
@@ -30,7 +35,11 @@ export const MonthSelector = ({ month, setMonth }: Props) => {
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => changeMonth(1)}>
-        <FontAwesome name="caret-right" size={70} color="blue" />
+        <FontAwesome
+          name="caret-right"
+          size={70}
+          color={Colors.default.primary}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -46,7 +55,7 @@ const styles = StyleSheet.create({
   },
 
   month: {
-    backgroundColor: "blue",
+    backgroundColor: Colors.default.primary,
     width: 65,
     height: 65,
     flexDirection: "row",
@@ -58,6 +67,6 @@ const styles = StyleSheet.create({
 
   monthLabel: {
     fontSize: 30,
-    color: "white",
+    color: Colors.default.textWhite,
   },
 });

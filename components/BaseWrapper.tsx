@@ -1,5 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
-import type { PropsWithChildren, ReactNode } from "react";
+import { useFocusEffect } from "expo-router";
+import { useRef, type PropsWithChildren, type ReactNode } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 
 type Props = PropsWithChildren<{
@@ -7,6 +8,12 @@ type Props = PropsWithChildren<{
 }>;
 
 export const BaseWrapper = ({ children }: Props) => {
+  const ref = useRef<ScrollView>(null);
+
+  useFocusEffect(() => {
+    ref.current?.scrollTo({ y: 0, animated: true });
+  });
+
   return (
     <LinearGradient
       colors={["#2C3135", "#24282D", "#191B1E"]}
@@ -14,7 +21,7 @@ export const BaseWrapper = ({ children }: Props) => {
       end={{ x: 1, y: 1 }}
       style={styles.baseContainer}
     >
-      <ScrollView>{children}</ScrollView>
+      <ScrollView ref={ref}>{children}</ScrollView>
     </LinearGradient>
   );
 };

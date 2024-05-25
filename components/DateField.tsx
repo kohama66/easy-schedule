@@ -1,11 +1,12 @@
 import { Colors } from "@/constants/Colors";
 import { rgba } from "@/utils/color";
 import { ScheduleDay } from "@/utils/scheduleDays";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Ionicons } from "@expo/vector-icons";
+import { useIsFocused } from "@react-navigation/native";
 
 type Props = {
   day: ScheduleDay;
@@ -19,6 +20,15 @@ export const DateField = ({ day }: Props) => {
   const toggleShow = () => {
     setShow(!show);
   };
+
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    // if (isFocused) {
+      // const value = new Date();
+      // setDate(value);
+    // }
+    setShow(false);
+  }, [isFocused]);
 
   const onChange = (_: Event, selectedDate?: Date) => {
     const currentDate = selectedDate || date;

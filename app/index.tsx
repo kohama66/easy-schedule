@@ -23,7 +23,7 @@ export default function HomeScreen() {
             }}
             style={{ paddingVertical: 20 }}
           >
-            <Text style={styles.enter}>Enter</Text>
+            <Text style={styles.enter}>Next</Text>
           </Link>
         </TouchableOpacity>
       </View>

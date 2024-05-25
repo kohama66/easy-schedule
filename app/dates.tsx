@@ -1,20 +1,13 @@
 import { ScheduleDay, getScheduleDaysFromStorage } from "@/utils/scheduleDays";
 import React, { useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  Button,
-  TouchableOpacity,
-} from "react-native";
+import { useForm, FormProvider } from "react-hook-form";
+import { StyleSheet, View, Button, TouchableOpacity } from "react-native";
 import * as Clipboard from "expo-clipboard";
 import Toast from "react-native-toast-message";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { BaseWrapper } from "@/components/BaseWrapper";
 import { Colors } from "@/constants/Colors";
-import { rgba } from "@/utils/color";
+import { DateField } from "@/components/DateField";
 
 type FormData = {
   [key: string]: string;
@@ -22,7 +15,8 @@ type FormData = {
 
 export default function App() {
   const [days, setDays] = useState<ScheduleDay[]>([]);
-  const { control, handleSubmit, setValue } = useForm<FormData>();
+  const methods = useForm<FormData>();
+  const { setValue, handleSubmit } = methods;
   const { month } = useLocalSearchParams();
   const router = useRouter();
 
@@ -60,41 +54,21 @@ export default function App() {
 
   return (
     <BaseWrapper>
-      <View style={styles.baseContainer}>
-        {days.map((d) => (
-          <View style={styles.inputWrapper} key={d.day}>
-            <Text
-              style={{
-                fontSize: 18,
-                color: Colors.default.textWhite,
-                fontWeight: "bold",
-              }}
-            >
-              {d.day}日 :{" "}
-            </Text>
-            <Controller
-              control={control}
-              name={d.day.toString()}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={styles.input}
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-            />
-          </View>
-        ))}
+      <FormProvider {...methods}>
+        <View style={styles.baseContainer}>
+          {days.map((d) => (
+            <DateField key={d.day} day={d} />
+          ))}
 
-        <TouchableOpacity style={styles.buttonWrapper}>
-          <Button
-            title="Copy"
-            onPress={handleSubmit(onSubmit)}
-            color={Colors.default.textWhite}
-          />
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity style={styles.buttonWrapper}>
+            <Button
+              title="Copy"
+              onPress={handleSubmit(onSubmit)}
+              color={Colors.default.textWhite}
+            />
+          </TouchableOpacity>
+        </View>
+      </FormProvider>
     </BaseWrapper>
   );
 }
@@ -102,23 +76,6 @@ export default function App() {
 const styles = StyleSheet.create({
   baseContainer: {
     paddingTop: 80,
-  },
-
-  inputWrapper: {
-    backgroundColor: rgba(Colors.default.dark, 0.7),
-    width: "80%",
-    alignSelf: "center",
-    flexDirection: "row",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 16,
-    marginBottom: 16,
-  },
-
-  input: {
-    fontSize: 18,
-    color: Colors.default.textWhite,
-    flex: 1,
   },
 
   buttonWrapper: {
